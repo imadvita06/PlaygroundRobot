@@ -45,8 +45,20 @@ public class Drivetrain extends SubsystemBase {
         double rightSpeed = forward - turn;
 
         // Keep motor speed between -1 and 1
-        leftSpeed = Math.max(-1, Math.min(1, leftSpeed));
-        rightSpeed = Math.max(-1, Math.min(1, rightSpeed));
+       if (leftSpeed > 1) {
+        leftSpeed = 1;
+       } else if (leftSpeed < -1) {
+        leftSpeed = -1
+       } else {
+        // already in between -1 and 1. leave it alone
+       }
+       if (rightSpeed > 1) {
+        rightSpeed = 1;
+       } else if (rightSpeed < -1) {
+        rightSpeed = -1
+       } else {
+        // already in between -1 and 1. leave it alone
+       }
 
         leftFront.set(leftSpeed);
         leftBack.set(leftSpeed);
